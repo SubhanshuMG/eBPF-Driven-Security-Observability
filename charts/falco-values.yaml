@@ -1,0 +1,18 @@
+image:
+  tag: latest
+
+backend:
+  enable_bpf: true
+
+mountHost:
+  sys: true
+  dev: true
+  proc: true
+  libModules: true
+
+serviceAccount:
+  create: true
+  name: falco-sa
+
+fileSystem:
+  enabled: true

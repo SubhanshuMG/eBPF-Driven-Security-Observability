@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: falco-rules
+  namespace: falco
+data:
+  rules.yaml: |
+    - rule: Outbound Connection on Suspicious Port
+      desc: Detect outbound connect() to port 4444
+      condition: evt.type = connect and fd.l4proto = TCP and fd.port = 4444
+      output: "Unauthorized outbound connection (pod=%container.name namespace=%container.namespace fd.name=%fd.name fd.sport=%fd.sport fd.port=%fd.port user=%user.name)"
+      priority: ERROR
+      tags: [network, suspicious]
+
+    - rule: Shell in Container
+      desc: Detect spawning a shell inside a container
+      condition: container.id != host and proc.name in (bash, sh, zsh)
+      output: "Shell spawned in container (user=%user.name, command=%proc.cmdline, container=%container.name, namespace=%container.namespace)"
+      priority: WARNING

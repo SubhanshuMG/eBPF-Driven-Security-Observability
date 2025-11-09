@@ -1,0 +1,10 @@
+config:
+  slack:
+    enabled: true
+    webhookurl: "REPLACE_WITH_SLACK_WEBHOOK"
+  prometheus:
+    enabled: true
+  outputs:
+    webhook:
+      enabled: true
+      url: "http://remediator.remediator.svc.cluster.local:8080/webhook"

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: python-bcc
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      app: python-bcc
+  template:
+    metadata:
+      labels:
+        app: python-bcc
+    spec:
+      hostPID: true
+      containers:
+      - name: bcc-agent
+        image: REPLACE_WITH_REGISTRY/python-bcc:latest
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - name: lib-modules
+          mountPath: /lib/modules
+          readOnly: true
+        - name: sys-fs
+          mountPath: /sys
+          readOnly: true
+        - name: proc
+          mountPath: /proc
+          readOnly: true
+      volumes:
+      - name: lib-modules
+        hostPath:
+          path: /lib/modules
+      - name: sys-fs
+        hostPath:
+          path: /sys
+      - name: proc
+        hostPath:
+          path: /proc

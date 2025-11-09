@@ -1,0 +1,12 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: isolate-compromised
+spec:
+  endpointSelector:
+    matchLabels:
+      compromised: "true"
+  ingress:
+  - {}
+  egress:
+  - {}
