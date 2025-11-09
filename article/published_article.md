@@ -69,7 +69,3 @@ Cilium policy in `manifests/cilium-block-policy.yaml` isolates pods labeled `com
 
 ## Appendix: Operator & CI
 This repo includes a minimal Go operator under `operator-remediator/` and a GitHub Actions workflow to build and push images.
-
----
-
-*Prepared for publication on blogs.subhanshumg.com*  
